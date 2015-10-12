@@ -17,7 +17,6 @@ def main():
     lines = KafkaUtils.createStream(ssc,zk_host,consumer_group,kafka_partitions)
     events = lines.map(lambda line: line[1].split(','))
     tmpagg = events.map(lambda event: ((event[0],event[1]),1) )
-    #10/12 edit because of tuple can't split error !!!THIS WORKED, but line[1] is where the actual data is, the rest is response information.
     coupon_counts = tmpagg.reduceByKey(lambda x,y: x+y)
     coupon_counts.pprint()
     ssc.start()
