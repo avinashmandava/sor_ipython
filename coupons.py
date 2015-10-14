@@ -64,12 +64,10 @@ class SimpleClient(object):
         """)
         self.session.execute("""
             CREATE TABLE loyalty.coupon_counters (
-                zip text,
                 offer_id text,
                 bucket text,
-                time timestamp,
-                count bigint,
-                PRIMARY KEY(zip, offer_id, bucket, time)
+                count int,
+                PRIMARY KEY(offer_id, bucket)
             );
         """)
         self.session.execute("""
